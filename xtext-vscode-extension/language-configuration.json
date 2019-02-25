@@ -1,0 +1,42 @@
+{
+    "comments": {
+        // symbol used for single line comment.
+        "lineComment": "//",
+        // symbols used for start and end a block comment.
+        "blockComment": [ "/*", "*/" ]
+    },
+    // symbols used as brackets
+    "brackets": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"]
+    ],
+    // symbols that are auto closed when typing
+    "autoClosingPairs": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        ["\"", "\""],
+        ["'", "'"]
+    ],
+    // symbols that that can be used to surround a selection
+    "surroundingPairs": [
+        ["{", "}"],
+        ["[", "]"],
+        ["(", ")"],
+        ["\"", "\""],
+        ["'", "'"]
+    ],
+    // folding declaration for grammar rules detected by "colon EOL" at the rule start and the "semicolon EOL" at the rule end
+    "folding": {
+		"markers": {
+			"start": "^\\s*.:\\b",
+			"end": "^\\s*;\\b"
+		}
+    },
+    // for auto indentation on the right hand side of a grammar rule and inside actions {} and parenthised alternatives
+    "indentationRules": {
+		"increaseIndentPattern": "\\(|\\{|:$",
+		"decreaseIndentPattern": "\\)|\\}|;$"
+	}
+}

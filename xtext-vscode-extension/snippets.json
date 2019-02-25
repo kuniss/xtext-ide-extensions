@@ -1,0 +1,36 @@
+{
+	"nonterminal rule": {
+		"prefix": "rule",
+		"body": [
+            "$1:",
+            "   $2",
+			";"
+		],
+		"description": "Creates a nonterminal rule"
+    },
+    "terminal rule": {
+		"prefix": "terminal",
+		"body": [
+            "terminal $1:",
+            "   '$2'",
+			";"
+		],
+		"description": "Creates a terminal rule"
+    },
+    "terminal fragment": {
+		"prefix": "terminal fragment",
+		"body": [
+            "terminal fragment $1:",
+            "   '$2'",
+			";"
+		],
+		"description": "Creates a terminal rule"
+    },
+    "cross reference": {
+		"prefix": "crossref",
+		"body": [
+            "[$1|$2]"
+		],
+		"description": "Inserts a cross reference to a nonterminal"
+    }
+}

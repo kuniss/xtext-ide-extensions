@@ -1,0 +1,36 @@
+{
+    "name": "xtext-lang",
+    "displayName": "Xtext Language",
+    "description": "Xtext Grammar Specification Language",
+    "version": "0.0.1",
+    "publisher": "grammarcraft",
+    "repository": {
+		"type": "git",
+		"url": "https://github.com/kuniss/xtext-ide-extensions.git"
+	},
+    "engines": {
+        "vscode": "^1.31.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [{
+            "id": "xtext",
+            "aliases": ["Xtext", "xtext"],
+            "extensions": [".xtext"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "xtext",
+            "scopeName": "source.Xtext",
+            "path": "./syntaxes/Xtext.tmLanguage.json"
+        }],
+        "snippets": [
+			{
+				"language": "xtext",
+				"path": "./snippets.json"
+			}
+		]
+	}
+}

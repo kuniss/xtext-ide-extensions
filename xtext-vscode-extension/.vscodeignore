@@ -1,0 +1,5 @@
+.vscode/**
+.vscode-test/**
+.gitignore
+Xtext.iro
+vsc-extension-quickstart.md

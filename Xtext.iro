@@ -1,0 +1,240 @@
+#################################################################
+## Iro
+################################################################ 
+##
+## * Press Ctrl + '+'/'-' To Zoom in
+## * Press Ctrl + S to save and recalculate... 
+## * Documents are saved to web storage.
+## * Only one save slot supported.
+## * Matches cannot span lines.
+## * Unicode chars must be defined in \u0000 to \uffff format.
+## * All matches must be contained by a single group ( ... )
+## * Look behinds not permitted, (?<= or (?<!
+## * Look forwards are permitted (?= or (?!
+## * Constants are defined as __my_const = (......)
+## * The \= format allows unescaped regular expressions
+## * Constants referenced by match \= $${__my_const}
+## * Constants can reference other constants
+## * You are free to delete all the default scopes.
+## * Twitter : ainslec , Web: http://eeyo.io/iro
+##
+################################################################
+
+name                   = Xtext
+file_extensions []     = xtext;
+
+################################################################
+## Styles
+################################################################
+
+styles [] {
+
+.comment : style {
+   color                 = light_green
+   italic                = true
+   ace_scope             = comment
+   textmate_scope        = comment
+   pygments_scope        = Comment
+}
+
+.keyword : style {
+   color                 = violet_red
+   ace_scope             = keyword
+   textmate_scope        = keyword
+   pygments_scope        = Keyword
+}
+
+.name : style {
+   color                 = white
+   ace_scope             = entity.name
+   textmate_scope        = entity.name
+   pygments_scope        = Name.Entity
+}
+
+.annotation : style {
+   color                 = gold
+   ace_scope             = support.type
+   textmate_scope        = support.type
+   pygments_scope        = Name.Attribute
+}
+
+.punctuation : style {
+   color                 = red
+   ace_scope             = punctuation
+   textmate_scope        = punctuation
+   pygments_scope        = Punctuation
+}
+
+.operator : style {
+   color                 = yellow
+   ace_scope             = keyword.operator
+   textmate_scope        = keyword.operator
+   pygments_scope        = Operator
+}
+
+.text : style {
+   color                 = light_blue
+   ace_scope             = text
+   textmate_scope        = text
+   pygments_scope        = String
+}
+
+.code : style {
+   color                 = light_yellow
+   ace_scope             = text source
+   textmate_scope        = text source
+   pygments_scope        = Generic.Inserted
+}
+
+
+.illegal : style {
+   color                 = white
+   background_color      = red
+   ace_scope             = invalid
+   textmate_scope        = invalid
+   pygments_scope        = Generic.Error
+}
+
+}
+
+#################################################
+## Parse contexts
+#################################################
+
+contexts [] {
+
+##############################################
+## Main Context - Entry point context
+##############################################
+
+main : context {
+   : include "grammar" ;
+}
+
+grammar : context {
+
+   : include "multi_line_comment" ;
+   : include "single_line_comment" ;
+   
+   : include "Action";
+   : include "escapedName";
+
+   : include "Keywords";   
+   : include "Operators";
+   : include "Punctuation";
+   
+   : include "Annotation";
+   : include "STRING";
+   : include "fullQualifiedName";
+
+   : pattern {
+      regex          \= ([^\s])
+      styles []       = .illegal;
+   }
+   
+}
+
+Keywords: context {
+   : pattern {
+      regex       \= (\bgrammar\b)|(\bwith\b)|(\bhidden\b)|(\bgenerate\b)|(\bas\b)|(\bimport\b)|(\bfragment\b)|(\breturns\b)|(\btrue\b)(\bfalse\b)|(\bterminal\b)|(\bfragment\b)|(\breturns\b)|(\bEOF\b)|(\benum\b)|(\beturns\b)
+      styles []    = .keyword ; 
+   }
+}
+
+Punctuation: context {
+   : pattern { 
+      regex       \= (,|\,|:|;)
+      styles []    = .punctuation ;
+   }
+}
+
+Operators: context {
+   : pattern { 
+      regex       \= (\*|&|\?|\*|\+|=|\||&|!|(=>)|(->)|(\+=)|(\?=)|(\.\.)|(\->)|\(|\)|<|>|\[|\])
+      styles []    = .operator ;
+   }
+}
+fullQualifiedName : context {
+   : pattern {
+      regex          \= (\b\w+(\.|\$\w+)*\b)
+      styles []       = .name;
+   }
+}
+
+escapedName : context {
+   description = for ^ escaped names 
+   : pattern {
+      regex       \= (\^\w+)
+      styles []    = .name;
+   }
+}
+
+Action : context {
+   : inline_push {
+      regex          \= (\{)
+      styles []       = .code;
+      default_style   = .code
+      : pop {
+         regex       \= (\})
+         styles []    = .code;
+      }
+   }
+}
+
+Annotation : context {
+   : pattern {
+      regex       \= (@\w+)
+      styles []    = .annotation ;
+   }
+}
+
+###########################################
+## Terminals
+###########################################
+
+single_line_comment : context {
+   description        = singleline comment
+   : pattern {
+      regex          \= (//.*)
+      styles []       = .comment;
+   }
+}
+
+
+multi_line_comment : context {
+   description        = multiline comment
+   : inline_push {
+      regex          \= (/\*)
+      styles []       = .comment;
+      default_style   = .comment
+      : pop {
+         regex       \= (\*/)
+         styles []    = .comment;
+      }
+   }
+}
+
+STRING : context {
+   description       = quoted string
+   : inline_push {
+      regex          \= (\")
+      styles []       = .text;
+      default_style   = .text
+      : pop {
+         regex       \= (\")
+         styles []    = .text;
+      }
+   }
+   : inline_push {
+      regex          \= (\')
+      styles []       = .text;
+      default_style   = .text
+      : pop {
+         regex       \= (\')
+         styles []    = .text;
+      }
+   }
+}
+   
+}
+
