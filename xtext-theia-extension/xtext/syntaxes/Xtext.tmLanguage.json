@@ -37,9 +37,6 @@
                 }
             ]
         },
-        "Action__1": {
-            "patterns": []
-        },
         "Annotation": {
             "patterns": [
                 {
@@ -105,12 +102,6 @@
                     }
                 }
             ]
-        },
-        "STRING__1": {
-            "patterns": []
-        },
-        "STRING__2": {
-            "patterns": []
         },
         "escapedName": {
             "patterns": [
@@ -184,9 +175,6 @@
                     }
                 }
             ]
-        },
-        "multi_line_comment__1": {
-            "patterns": []
         },
         "single_line_comment": {
             "patterns": [
