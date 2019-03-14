@@ -16,7 +16,12 @@
     "@theia/monaco": "latest",
     "@theia/typescript": "latest",
     "@theia/messages": "latest",
-    "xtext": "0.0.0"
+    "@theia/java": "latest",
+    "@theia/git": "latest",
+    "@theia/file-search": "latest",
+    "@theia/merge-conflicts": "latest",
+    "@theia/search-in-workspace": "latest",
+     "xtext": "0.0.0"
   },
   "devDependencies": {
     "@theia/cli": "latest"
