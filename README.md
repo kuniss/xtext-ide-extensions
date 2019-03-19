@@ -3,7 +3,8 @@ This project contains several IDE extensions for the Xtext grammar language, mai
 
 ## List of Supported Extensions
 
-* VS Code
+* VS Code (syntax highlighting, folding, brackets)
+* Theia/Gitpod (syntax highlighting, folding, brackets)
 
 ## Development Hint
 
