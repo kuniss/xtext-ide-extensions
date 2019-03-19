@@ -21,4 +21,4 @@ No language server support yet.
 
 ## Release Notes
 
-beta; not released to Marketplace yet
+beta; not for production use yet
