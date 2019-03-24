@@ -6,9 +6,6 @@ This is a language extension for the Xtext grammar specifcation language.
 
 Currrently the following features are supported:
 * syntax highlighting 
-* folding
-* auto bracket closing and insertion
-* snippets
 
 ## Known Issues
 
