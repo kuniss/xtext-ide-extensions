@@ -1,0 +1,646 @@
+{
+	"fileTypes": [
+		"xtend"
+	],
+	"name": "Xtend",
+	"patterns": [
+		{
+			"include": "#main"
+		}
+	],
+	"scopeName": "source.Xtend",
+	"uuid": "",
+	"repository": {
+		"main": {
+			"patterns": [
+				{
+					"include": "#grammar"
+				}
+			]
+		},
+		"Annotation": {
+			"patterns": [
+				{
+					"match": "(@\\w+)",
+					"name": "support.type.Xtend"
+				},
+				{
+					"begin": "(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#Annotation__1"
+						}
+					],
+					"end": "(\\))",
+					"endCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					}
+				}
+			]
+		},
+		"Annotation__1": {
+			"patterns": [
+				{
+					"include": "#Operators"
+				},
+				{
+					"include": "#Punctuation"
+				},
+				{
+					"include": "#Expression"
+				}
+			]
+		},
+		"BracedExpression": {
+			"patterns": [
+				{
+					"begin": "(\\{)",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#BracedExpression__1"
+						}
+					],
+					"end": "(\\})",
+					"endCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					}
+				}
+			]
+		},
+		"BracedExpression__1": {
+			"patterns": [
+				{
+					"include": "#Expression"
+				}
+			]
+		},
+		"BracedTypeBody": {
+			"patterns": [
+				{
+					"begin": "(\\{)",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#BracedTypeBody__1"
+						}
+					],
+					"end": "(\\})",
+					"endCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					}
+				}
+			]
+		},
+		"BracedTypeBody__1": {
+			"patterns": [
+				{
+					"include": "#TypeMember"
+				}
+			]
+		},
+		"BracketizedExpression": {
+			"patterns": [
+				{
+					"begin": "(\\[)",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#BracketizedExpression__1"
+						}
+					],
+					"end": "(\\])",
+					"endCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					}
+				}
+			]
+		},
+		"BracketizedExpression__1": {
+			"patterns": [
+				{
+					"match": "(\\bit\\b)",
+					"name": "keyword.Xtend"
+				},
+				{
+					"include": "#Expression"
+				}
+			]
+		},
+		"CommonModifier": {
+			"patterns": [
+				{
+					"match": "(\\bpublic\\b)|(\\bprivate\\b)|(\\bprotected\\b)|(\\bpackage\\b)|(\\babstract\\b)|(\\bstatic\\b)|(\\bdispatch\\b)|(\\bfinal\\b)|(\\bstrictfp\\b)|(\\bnative\\b)|(\\bvolatile\\b)|(\\bsynchronized\\b)|(\\btransient\\b)|(\\bboolean\\b)|(\\bint\\b)|(\\bfloat\\b)|(\\bdouble\\b)|(\\bchar\\b)",
+					"name": "keyword.Xtend"
+				}
+			]
+		},
+		"Expression": {
+			"patterns": [
+				{
+					"include": "#MultiLineComment"
+				},
+				{
+					"include": "#SingleLineComment"
+				},
+				{
+					"include": "#ExpressionKeywords"
+				},
+				{
+					"include": "#Operators"
+				},
+				{
+					"include": "#Punctuation"
+				},
+				{
+					"include": "#StringOrTemplateString"
+				},
+				{
+					"include": "#BracedExpression"
+				},
+				{
+					"include": "#ParenthesizedExpression"
+				},
+				{
+					"include": "#BracketizedExpression"
+				},
+				{
+					"include": "#QualifiedName"
+				},
+				{
+					"include": "#Annotation"
+				}
+			]
+		},
+		"ExpressionKeywords": {
+			"patterns": [
+				{
+					"match": "(\\btry\\b)|(\\bcatch\\b)|(\\bfinally\\b)|(\\breturn\\b)|(\\bnew\\b)|(\\bswitch\\b)|(\\bcase\\b)|(\\bdefault\\b)|(\\bif\\b)|(\\belse\\b)|(\\bwhile\\b)|(\\bfor\\b)|(\\bdo\\b)|(\\bsuper\\b)|(\\btrue\\b)|(\\bfalse\\b)|(\\bnull\\b)|(\\btypeof\\b)|(\\bthrow\\b)|(\\bsynchronized\\b)",
+					"name": "keyword.Xtend"
+				},
+				{
+					"include": "#FieldOrVarModifier"
+				}
+			]
+		},
+		"FieldOrVarModifier": {
+			"patterns": [
+				{
+					"match": "(\\bval\\b)|(\\bvar\\b)|(\\bextension\\b)",
+					"name": "keyword.Xtend"
+				}
+			]
+		},
+		"File": {
+			"patterns": [
+				{
+					"include": "#GlobalKeywords"
+				},
+				{
+					"include": "#QualifiedName"
+				},
+				{
+					"match": "(\\.\\*)",
+					"name": "keyword.operator.Xtend"
+				},
+				{
+					"include": "#Type"
+				},
+				{
+					"include": "#Punctuation"
+				}
+			]
+		},
+		"GlobalKeywords": {
+			"patterns": [
+				{
+					"match": "(\\bpackage\\b)|(\\bimport\\b)|(\\bclass\\b)|(\\binterface\\b)|(\\benum\\b)|(\\bannotation\\b)|(\\bextends\\b)|(\\bimplements\\b)|(\\bstatic\\b)|(\\bextension\\b)",
+					"name": "keyword.Xtend"
+				}
+			]
+		},
+		"MethodModifier": {
+			"patterns": [
+				{
+					"match": "(\\bdef\\b)|(\\boverride\\b)|(\\bnew\\b)|(\\bthrows\\b)|(\\bcreate\\b)",
+					"name": "keyword.Xtend"
+				}
+			]
+		},
+		"MethodOrFieldDefinition": {
+			"patterns": [
+				{
+					"include": "#Annotation"
+				},
+				{
+					"include": "#CommonModifier"
+				},
+				{
+					"include": "#FieldOrVarModifier"
+				},
+				{
+					"include": "#MethodModifier"
+				},
+				{
+					"include": "#TypeParameters"
+				},
+				{
+					"include": "#Parameters"
+				},
+				{
+					"include": "#Expression"
+				},
+				{
+					"include": "#Name"
+				}
+			]
+		},
+		"MultiLineComment": {
+			"patterns": [
+				{
+					"begin": "(\/\\*)",
+					"beginCaptures": {
+						"1": {
+							"name": "comment.Xtend"
+						}
+					},
+					"contentName": "comment.Xtend",
+					"end": "(\\*\/)",
+					"endCaptures": {
+						"1": {
+							"name": "comment.Xtend"
+						}
+					}
+				}
+			]
+		},
+		"MultiLineComment__1": {
+			"patterns": []
+		},
+		"Name": {
+			"patterns": [
+				{
+					"match": "(\\^?\\w+)",
+					"name": "entity.name.Xtend"
+				}
+			]
+		},
+		"Operators": {
+			"patterns": [
+				{
+					"match": "(#|\\*|&|\\?|\\*|\\+|(===)|(==)|=|&|!|(=>)|(->)|(\\+=)|(\\?=)|(\\.\\.)|(\\->)|<|>|\\||(\\|\\|))|(\\binstanceof\\b)",
+					"name": "keyword.operator.Xtend"
+				}
+			]
+		},
+		"Parameters": {
+			"patterns": [
+				{
+					"begin": "(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#Parameters__1"
+						}
+					],
+					"end": "(\\))",
+					"endCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					}
+				}
+			]
+		},
+		"Parameters__1": {
+			"patterns": [
+				{
+					"include": "#Annotation"
+				},
+				{
+					"include": "#QualifiedName"
+				},
+				{
+					"include": "#Punctuation"
+				}
+			]
+		},
+		"ParenthesizedExpression": {
+			"patterns": [
+				{
+					"begin": "(\\()",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#ParenthesizedExpression__1"
+						}
+					],
+					"end": "(\\))",
+					"endCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					}
+				}
+			]
+		},
+		"ParenthesizedExpression__1": {
+			"patterns": [
+				{
+					"include": "#Expression"
+				}
+			]
+		},
+		"Punctuation": {
+			"patterns": [
+				{
+					"match": "(,|\\,|:|;|(\\.\\.\\.)|(\\b\\|\\b))",
+					"name": "punctuation.Xtend"
+				}
+			]
+		},
+		"QualifiedName": {
+			"patterns": [
+				{
+					"match": "(\\b\\w+(\\.|\\$\\w+)*\\b)",
+					"name": "entity.name.Xtend"
+				}
+			]
+		},
+		"SingleLineComment": {
+			"patterns": [
+				{
+					"match": "(\/\/.*)",
+					"name": "comment.Xtend"
+				}
+			]
+		},
+		"String": {
+			"patterns": [
+				{
+					"begin": "(\\\")",
+					"beginCaptures": {
+						"1": {
+							"name": "meta.tag string.quoted constant.character.entity.Xtend"
+						}
+					},
+					"contentName": "meta.tag string.quoted constant.character.entity.Xtend",
+					"end": "(\\\")",
+					"endCaptures": {
+						"1": {
+							"name": "meta.tag string.quoted constant.character.entity.Xtend"
+						}
+					}
+				},
+				{
+					"begin": "(\\')",
+					"beginCaptures": {
+						"1": {
+							"name": "meta.tag string.quoted constant.character.entity.Xtend"
+						}
+					},
+					"contentName": "meta.tag string.quoted constant.character.entity.Xtend",
+					"end": "(\\')",
+					"endCaptures": {
+						"1": {
+							"name": "meta.tag string.quoted constant.character.entity.Xtend"
+						}
+					}
+				}
+			]
+		},
+		"StringOrTemplateString": {
+			"patterns": [
+				{
+					"include": "#TemplateString"
+				},
+				{
+					"include": "#String"
+				}
+			]
+		},
+		"String__1": {
+			"patterns": []
+		},
+		"String__2": {
+			"patterns": []
+		},
+		"TEMPLATE_TEXT": {
+			"patterns": [
+				{
+					"match": "([^\\x{00ab}])",
+					"name": "meta.tag string.quoted.Xtend"
+				}
+			]
+		},
+		"TemplateComment": {
+			"patterns": [
+				{
+					"match": "(\u00ab\u00ab[^\\n\\n]*)",
+					"name": "comment.Xtend"
+				}
+			]
+		},
+		"TemplateExpression": {
+			"patterns": [
+				{
+					"begin": "(\u00ab)",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#TemplateExpression__1"
+						}
+					],
+					"end": "(\u00bb)",
+					"endCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					}
+				}
+			]
+		},
+		"TemplateExpression__1": {
+			"patterns": [
+				{
+					"include": "#TemplateKeywords"
+				},
+				{
+					"include": "#Expression"
+				}
+			]
+		},
+		"TemplateKeywords": {
+			"patterns": [
+				{
+					"match": "(\\bFOR\\b)|(\\bBEFORE\\b)|(\\bSEPARATOR\\b)|(\\bAFTER\\b)|(\\bENDFOR\\b)|(\\bIF\\b)|(\\bELSE\\b)|(\\bELSEIF\\b)|(\\bENDIF\\b)",
+					"name": "keyword.Xtend"
+				}
+			]
+		},
+		"TemplateString": {
+			"patterns": [
+				{
+					"begin": "(\\'\\'\\')",
+					"beginCaptures": {
+						"1": {
+							"name": "meta.tag string.quoted.Xtend"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#TemplateString__1"
+						}
+					],
+					"end": "(\\'\\'\\')",
+					"endCaptures": {
+						"1": {
+							"name": "meta.tag string.quoted.Xtend"
+						}
+					}
+				}
+			]
+		},
+		"TemplateString__1": {
+			"patterns": [
+				{
+					"include": "#TemplateComment"
+				},
+				{
+					"include": "#TEMPLATE_TEXT"
+				},
+				{
+					"include": "#TemplateExpression"
+				}
+			]
+		},
+		"Type": {
+			"patterns": [
+				{
+					"include": "#MultiLineComment"
+				},
+				{
+					"include": "#SingleLineComment"
+				},
+				{
+					"include": "#Annotation"
+				},
+				{
+					"include": "#GlobalKeywords"
+				},
+				{
+					"include": "#CommonModifier"
+				},
+				{
+					"include": "#TypeParameters"
+				},
+				{
+					"include": "#BracedTypeBody"
+				}
+			]
+		},
+		"TypeMember": {
+			"patterns": [
+				{
+					"include": "#MultiLineComment"
+				},
+				{
+					"include": "#SingleLineComment"
+				},
+				{
+					"include": "#MethodOrFieldDefinition"
+				},
+				{
+					"include": "#Type"
+				}
+			]
+		},
+		"TypeParameters": {
+			"patterns": [
+				{
+					"begin": "(<)",
+					"beginCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					},
+					"patterns": [
+						{
+							"include": "#TypeParameters__1"
+						}
+					],
+					"end": "(>)",
+					"endCaptures": {
+						"1": {
+							"name": "keyword.punctutation.Xtend"
+						}
+					}
+				}
+			]
+		},
+		"TypeParameters__1": {
+			"patterns": [
+				{
+					"include": "#Name"
+				},
+				{
+					"include": "#TypeParameters"
+				}
+			]
+		},
+		"grammar": {
+			"patterns": [
+				{
+					"include": "#MultiLineComment"
+				},
+				{
+					"include": "#SingleLineComment"
+				},
+				{
+					"include": "#File"
+				},
+				{
+					"match": "([^\\s])",
+					"name": "invalid.Xtend"
+				}
+			]
+		}
+	}
+}
