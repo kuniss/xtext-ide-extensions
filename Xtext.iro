@@ -39,13 +39,13 @@ styles [] {
 
 .keyword : style {
    color                 = violet_red
-   ace_scope             = keyword
-   textmate_scope        = keyword
+   ace_scope             = keyword.control
+   textmate_scope        = keyword.control
    pygments_scope        = Keyword
 }
 
 .name : style {
-   color                 = white
+   color                 = light_yellow
    ace_scope             = entity.name
    textmate_scope        = entity.name
    pygments_scope        = Name.Entity
@@ -72,11 +72,18 @@ styles [] {
    pygments_scope        = Operator
 }
 
-.text : style {
+.string_double_quoted : style {
    color                 = light_blue
-   ace_scope             = text
-   textmate_scope        = text
-   pygments_scope        = String
+   ace_scope             = string.quoted.double
+   textmate_scope        = string.quoted.double
+   pygments_scope        = String.Double
+}
+
+.string_single_quoted : style {
+   color                 = light_blue
+   ace_scope             = string.quoted.single
+   textmate_scope        = string.quoted.single
+   pygments_scope        = String.Single
 }
 
 .code : style {
@@ -218,20 +225,20 @@ STRING : context {
    description       = quoted string
    : inline_push {
       regex          \= (\")
-      styles []       = .text;
-      default_style   = .text
+      styles []       = .string_double_quoted;
+      default_style   = .string_double_quoted
       : pop {
          regex       \= (\")
-         styles []    = .text;
+         styles []    = .string_double_quoted;
       }
    }
    : inline_push {
       regex          \= (\')
-      styles []       = .text;
-      default_style   = .text
+      styles []       = .string_single_quoted;
+      default_style   = .string_single_quoted
       : pop {
          regex       \= (\')
-         styles []    = .text;
+         styles []    = .string_single_quoted;
       }
    }
 }
