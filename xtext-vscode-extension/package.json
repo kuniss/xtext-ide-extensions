@@ -2,17 +2,17 @@
     "name": "xtext-lang",
     "displayName": "Xtext Language",
     "description": "Xtext Grammar Specification Language",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "publisher": "grammarcraft",
     "license": "SEE LICENSE IN LICENSE.txt",
     "homepage": "https://github.com/kuniss/xtext-ide-extensions/blob/master/xtext-vscode-extension/README.md",
     "bugs": {
-      "url": "https://github.com/kuniss/xtext-ide-extensions/issues"
+        "url": "https://github.com/kuniss/xtext-ide-extensions/issues"
     },
     "repository": {
-		"type": "git",
-		"url": "https://github.com/kuniss/xtext-ide-extensions.git"
-	},
+        "type": "git",
+        "url": "https://github.com/kuniss/xtext-ide-extensions.git"
+    },
     "engines": {
         "vscode": "^1.31.0"
     },
@@ -20,22 +20,31 @@
         "Programming Languages"
     ],
     "contributes": {
-        "languages": [{
-            "id": "xtext",
-            "aliases": ["Xtext", "xtext"],
-            "extensions": [".xtext"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "xtext",
-            "scopeName": "source.Xtext",
-            "path": "./syntaxes/Xtext.tmLanguage.json"
-        }],
+        "languages": [
+            {
+                "id": "xtext",
+                "aliases": [
+                    "Xtext",
+                    "xtext"
+                ],
+                "extensions": [
+                    ".xtext"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "xtext",
+                "scopeName": "source.Xtext",
+                "path": "./syntaxes/Xtext.tmLanguage.json"
+            }
+        ],
         "snippets": [
-			{
-				"language": "xtext",
-				"path": "./snippets.json"
-			}
-		]
-	}
+            {
+                "language": "xtext",
+                "path": "./snippets.json"
+            }
+        ]
+    }
 }
