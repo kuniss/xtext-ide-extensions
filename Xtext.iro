@@ -29,16 +29,25 @@ file_extensions []     = xtext;
 
 styles [] {
 
-.comment : style {
+.comment_multiline : style {
    color                 = light_green
    italic                = true
-   ace_scope             = comment
-   textmate_scope        = comment
-   pygments_scope        = Comment
+   ace_scope             = comment.block
+   textmate_scope        = comment.block
+   pygments_scope        = Comment.Multiline
+}
+
+.comment_singleline : style {
+   color                 = green
+   italic                = true
+   ace_scope             = comment.line.double-slash
+   textmate_scope        = comment.line.double-slash
+   pygments_scope        = Comment.Single
 }
 
 .keyword : style {
    color                 = violet_red
+   bold                  = true
    ace_scope             = keyword.control
    textmate_scope        = keyword.control
    pygments_scope        = Keyword
@@ -86,13 +95,11 @@ styles [] {
    pygments_scope        = String.Single
 }
 
-.code : style {
-   color                 = light_yellow
-   ace_scope             = text source
-   textmate_scope        = text source
-   pygments_scope        = Generic.Inserted
+.whitespace : style {
+   ace_scope             = whitespace
+   textmate_scope        = whitespace
+   pygments_scope        = Generic
 }
-
 
 .illegal : style {
    color                 = white
@@ -123,16 +130,18 @@ grammar : context {
    : include "multi_line_comment" ;
    : include "single_line_comment" ;
    
-   : include "Action";
-   : include "escapedName";
 
    : include "Keywords";   
    : include "Operators";
    : include "Punctuation";
    
+   : include "Action";
+   : include "FeatureAssignment";
+   : include "fullQualifiedName";
+   : include "escapedName";
+
    : include "Annotation";
    : include "STRING";
-   : include "fullQualifiedName";
 
    : pattern {
       regex          \= ([^\s])
@@ -150,20 +159,20 @@ Keywords: context {
 
 Punctuation: context {
    : pattern { 
-      regex       \= (,|\,|:|;)
+      regex       \= (,|\,|:|;|<|>|\(|\))
       styles []    = .punctuation ;
    }
 }
 
 Operators: context {
    : pattern { 
-      regex       \= (\*|&|\?|\*|\+|=|\||&|!|(=>)|(->)|(\+=)|(\?=)|(\.\.)|(\->)|\(|\)|<|>|\[|\])
+      regex       \= (\*|&|\?|\*|\+|\||&|!|(=>)|(\.\.)|(\->)|\[|\])
       styles []    = .operator ;
    }
 }
 fullQualifiedName : context {
    : pattern {
-      regex          \= (\b\w+(\.|\$\w+)*\b)
+      regex          \= (\^?(?:\w+::)?\b\w+(\.|\$\w+)*\b)
       styles []       = .name;
    }
 }
@@ -177,14 +186,9 @@ escapedName : context {
 }
 
 Action : context {
-   : inline_push {
-      regex          \= (\{)
-      styles []       = .code;
-      default_style   = .code
-      : pop {
-         regex       \= (\})
-         styles []    = .code;
-      }
+   : pattern {
+      regex       \= ({)((?:\w+::)?\^?\w+\.?\w*)(\s*)(\+?=?)(\s*)((?:current)?)(})
+      styles []    = .punctuation, .name, .whitespace, .operator, .whitespace, .keyword, .punctuation;
    }
 }
 
@@ -192,6 +196,13 @@ Annotation : context {
    : pattern {
       regex       \= (@\w+)
       styles []    = .annotation ;
+   }
+}
+
+FeatureAssignment : context {
+   : pattern {
+      regex       \= (\^?\w+)(\s*)((?:[\+\?]=)|(?:=))
+      styles[]    = .name, .whitespace, .operator;
    }
 }
 
@@ -203,7 +214,7 @@ single_line_comment : context {
    description        = singleline comment
    : pattern {
       regex          \= (//.*)
-      styles []       = .comment;
+      styles []       = .comment_singleline;
    }
 }
 
@@ -212,11 +223,11 @@ multi_line_comment : context {
    description        = multiline comment
    : inline_push {
       regex          \= (/\*)
-      styles []       = .comment;
-      default_style   = .comment
+      styles []       = .comment_multiline;
+      default_style   = .comment_multiline
       : pop {
          regex       \= (\*/)
-         styles []    = .comment;
+         styles []    = .comment_multiline;
       }
    }
 }

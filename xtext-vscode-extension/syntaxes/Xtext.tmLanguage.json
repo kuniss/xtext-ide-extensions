@@ -21,24 +21,32 @@
         "Action": {
             "patterns": [
                 {
-                    "begin": "(\\{)",
-                    "beginCaptures": {
+                    "match": "({)((?:\\w+::)?\\^?\\w+\\.?\\w*)(\\s*)(\\+?=?)(\\s*)((?:current)?)(})",
+                    "captures": {
                         "1": {
-                            "name": "support.other.Xtext"
-                        }
-                    },
-                    "contentName": "support.other.Xtext",
-                    "end": "(\\})",
-                    "endCaptures": {
-                        "1": {
-                            "name": "support.other.Xtext"
+                            "name": "punctuation.Xtext"
+                        },
+                        "2": {
+                            "name": "entity.name.Xtext"
+                        },
+                        "3": {
+                            "name": "whitespace.Xtext"
+                        },
+                        "4": {
+                            "name": "keyword.operator.Xtext"
+                        },
+                        "5": {
+                            "name": "whitespace.Xtext"
+                        },
+                        "6": {
+                            "name": "keyword.control.Xtext"
+                        },
+                        "7": {
+                            "name": "punctuation.Xtext"
                         }
                     }
                 }
             ]
-        },
-        "Action__1": {
-            "patterns": []
         },
         "Annotation": {
             "patterns": [
@@ -48,18 +56,36 @@
                 }
             ]
         },
+        "FeatureAssignment": {
+            "patterns": [
+                {
+                    "match": "(\\^?\\w+)(\\s*)((?:[\\+\\?]=)|(?:=))",
+                    "captures": {
+                        "1": {
+                            "name": "entity.name.Xtext"
+                        },
+                        "2": {
+                            "name": "whitespace.Xtext"
+                        },
+                        "3": {
+                            "name": "keyword.operator.Xtext"
+                        }
+                    }
+                }
+            ]
+        },
         "Keywords": {
             "patterns": [
                 {
                     "match": "(\\bgrammar\\b)|(\\bwith\\b)|(\\bhidden\\b)|(\\bgenerate\\b)|(\\bas\\b)|(\\bimport\\b)|(\\bfragment\\b)|(\\breturns\\b)|(\\btrue\\b)(\\bfalse\\b)|(\\bterminal\\b)|(\\bfragment\\b)|(\\breturns\\b)|(\\bEOF\\b)|(\\benum\\b)|(\\beturns\\b)",
-                    "name": "keyword.Xtext"
+                    "name": "keyword.control.Xtext"
                 }
             ]
         },
         "Operators": {
             "patterns": [
                 {
-                    "match": "(\\*|&|\\?|\\*|\\+|=|\\||&|!|(=>)|(->)|(\\+=)|(\\?=)|(\\.\\.)|(\\->)|\\(|\\)|<|>|\\[|\\])",
+                    "match": "(\\*|&|\\?|\\*|\\+|\\||&|!|(=>)|(\\.\\.)|(\\->)|\\[|\\])",
                     "name": "keyword.operator.Xtext"
                 }
             ]
@@ -67,7 +93,7 @@
         "Punctuation": {
             "patterns": [
                 {
-                    "match": "(,|\\,|:|;)",
+                    "match": "(,|\\,|:|;|<|>|\\(|\\))",
                     "name": "punctuation.Xtext"
                 }
             ]
@@ -78,14 +104,14 @@
                     "begin": "(\\\")",
                     "beginCaptures": {
                         "1": {
-                            "name": "meta.tag string.quoted constant.character.entity.Xtext"
+                            "name": "string.quoted.double.Xtext"
                         }
                     },
-                    "contentName": "meta.tag string.quoted constant.character.entity.Xtext",
+                    "contentName": "string.quoted.double.Xtext",
                     "end": "(\\\")",
                     "endCaptures": {
                         "1": {
-                            "name": "meta.tag string.quoted constant.character.entity.Xtext"
+                            "name": "string.quoted.double.Xtext"
                         }
                     }
                 },
@@ -93,14 +119,14 @@
                     "begin": "(\\')",
                     "beginCaptures": {
                         "1": {
-                            "name": "meta.tag string.quoted constant.character.entity.Xtext"
+                            "name": "string.quoted.single.Xtext"
                         }
                     },
-                    "contentName": "meta.tag string.quoted constant.character.entity.Xtext",
+                    "contentName": "string.quoted.single.Xtext",
                     "end": "(\\')",
                     "endCaptures": {
                         "1": {
-                            "name": "meta.tag string.quoted constant.character.entity.Xtext"
+                            "name": "string.quoted.single.Xtext"
                         }
                     }
                 }
@@ -123,7 +149,7 @@
         "fullQualifiedName": {
             "patterns": [
                 {
-                    "match": "(\\b\\w+(\\.|\\$\\w+)*\\b)",
+                    "match": "(\\^?(?:\\w+::)?\\b\\w+(\\.|\\$\\w+)*\\b)",
                     "name": "entity.name.Xtext"
                 }
             ]
@@ -137,12 +163,6 @@
                     "include": "#single_line_comment"
                 },
                 {
-                    "include": "#Action"
-                },
-                {
-                    "include": "#escapedName"
-                },
-                {
                     "include": "#Keywords"
                 },
                 {
@@ -152,13 +172,22 @@
                     "include": "#Punctuation"
                 },
                 {
+                    "include": "#Action"
+                },
+                {
+                    "include": "#FeatureAssignment"
+                },
+                {
+                    "include": "#fullQualifiedName"
+                },
+                {
+                    "include": "#escapedName"
+                },
+                {
                     "include": "#Annotation"
                 },
                 {
                     "include": "#STRING"
-                },
-                {
-                    "include": "#fullQualifiedName"
                 },
                 {
                     "match": "([^\\s])",
@@ -172,14 +201,14 @@
                     "begin": "(\/\\*)",
                     "beginCaptures": {
                         "1": {
-                            "name": "comment.Xtext"
+                            "name": "comment.block.Xtext"
                         }
                     },
-                    "contentName": "comment.Xtext",
+                    "contentName": "comment.block.Xtext",
                     "end": "(\\*\/)",
                     "endCaptures": {
                         "1": {
-                            "name": "comment.Xtext"
+                            "name": "comment.block.Xtext"
                         }
                     }
                 }
@@ -192,7 +221,7 @@
             "patterns": [
                 {
                     "match": "(\/\/.*)",
-                    "name": "comment.Xtext"
+                    "name": "comment.line.double-slash.Xtext"
                 }
             ]
         }
