@@ -1,0 +1,9 @@
+grammar de.grammarcraft.xtext.ls.Xtext with org.eclipse.xtext.common.Terminals
+
+generate xtext "http://www.grammarcraft.de/xtext/ls/Xtext"
+
+Model:
+	greetings+=Greeting*;
+	
+Greeting:
+	'Hello' name=ID '!';
