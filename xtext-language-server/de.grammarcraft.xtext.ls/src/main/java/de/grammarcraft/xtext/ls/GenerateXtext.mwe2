@@ -27,6 +27,9 @@ Workflow {
 			name = "de.grammarcraft.xtext.ls.Xtext"
 			fileExtensions = "xtext"
 
+            referencedResource = "platform:/resource/org.eclipse.xtext/org/eclipse/xtext/Xtext.genmodel"
+            referencedResource = "platform:/resource/org.eclipse.xtext/org/eclipse/xtext/Xtext.ecore"
+            
 			serializer = {
 				generateStub = false
 			}
