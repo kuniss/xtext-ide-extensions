@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.Xtext with org.eclipse.xtext.common.Terminals
+grammar de.grammarcraft.xtext.ls.Xtext with org.eclipse.xtext.common.Terminals
 
 import "http://www.eclipse.org/2008/Xtext"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
