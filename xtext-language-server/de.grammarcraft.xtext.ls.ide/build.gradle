@@ -11,6 +11,7 @@ dependencies {
 apply plugin: 'application'
 apply plugin: 'com.github.johnrengelman.shadow'
 mainClassName = "org.eclipse.xtext.ide.server.ServerLauncher"
+def languageServerName = 'xtext-language-server'
 
 shadowJar {
 	from(project.convention.getPlugin(JavaPluginConvention).sourceSets.main.output)
@@ -18,6 +19,20 @@ shadowJar {
 	exclude('META-INF/INDEX.LIST', 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA','schema/*',
 		'.options', '.api_description', '*.profile', '*.html', 'about.*', 'about_files/*',
 		'plugin.xml', 'modeling32.png', 'systembundle.properties', 'profile.list')
-	classifier = 'ls'
+	//classifier = 'ls'
 	append('plugin.properties')
+	baseName =  languageServerName
+
+}
+
+startShadowScripts {
+	applicationName = languageServerName
+
+}
+
+distributions {
+	shadow {
+		baseName = languageServerName
+	
+	}
 }
