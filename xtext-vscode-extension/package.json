@@ -2,7 +2,7 @@
     "name": "xtext-lang",
     "displayName": "Xtext Language",
     "description": "Xtext Grammar Specification Language",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "publisher": "grammarcraft",
     "license": "SEE LICENSE IN LICENSE.txt",
     "homepage": "https://github.com/kuniss/xtext-ide-extensions/blob/master/xtext-vscode-extension/README.md",
@@ -64,7 +64,7 @@
     },
     "scripts": {
         "preinstall": "npm run install:languageserver",
-        
+
         "install:languageserver": "rm -rf ./build && mkdir build && npm run copy:languageserver",
         "copy:languageserver": "cp ../xtext-language-server/de.grammarcraft.xtext.ls.ide/build/distributions/xtext-language-server-1.0.0-SNAPSHOT.zip ./build && unzip ./build/xtext-language-server-1.0.0-SNAPSHOT.zip && mv xtext-language-server-1.0.0-SNAPSHOT server",
         "vscode:prepublish": "tsc -p ./",
