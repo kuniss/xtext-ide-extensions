@@ -1,5 +1,15 @@
 .vscode/**
-.vscode-test/**
+**/*.ts
+**/*.map
 .gitignore
+**/tsconfig.json
+**/tsconfig.base.json
+.travis.yml
+node_modules/**
+!node_modules/vscode-jsonrpc/**
+!node_modules/vscode-languageclient/**
+!node_modules/vscode-languageserver-protocol/**
+!node_modules/vscode-languageserver-types/**
+build
 Xtext.iro
 vsc-extension-quickstart.md
