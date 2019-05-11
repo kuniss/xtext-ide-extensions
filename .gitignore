@@ -2,3 +2,4 @@ xtext-vscode-extension/vsc-extension-quickstart.md
 node_modules
 build
 out
+xtext-vscode-extension/server

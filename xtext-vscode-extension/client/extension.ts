@@ -8,21 +8,17 @@
 'use strict';
 
 import * as path from 'path';
-import * as cp from 'child_process';
 import * as os from 'os';
 import {
     workspace,
     commands,
-    Disposable,
     Uri,
     ExtensionContext
 } from 'vscode';
 import {
     LanguageClient,
     LanguageClientOptions,
-    SettingMonitor,
     ServerOptions,
-    TransportKind,
     Position as LSPosition, Location as LSLocation
 } from 'vscode-languageclient';
 
@@ -30,7 +26,7 @@ export function activate(context: ExtensionContext) {
 
     // The server is implemented in node
     let executable = os.platform() === 'win32' ? 'xtext-language-server.bat' : 'xtext-language-server';
-    let serverModule = context.asAbsolutePath(path.join('build', 'xtext-language-server', 'bin', executable));
+    let serverModule = context.asAbsolutePath(path.join('server', 'bin', executable));
 
     // If the extension is launched in debug mode then the debug server options are used
     // Otherwise the run options are used
