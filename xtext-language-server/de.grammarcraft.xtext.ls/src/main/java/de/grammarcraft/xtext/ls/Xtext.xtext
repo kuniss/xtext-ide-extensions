@@ -5,6 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
+
+/*
+ * This grammar was copied from https://github.com/eclipse/xtext-core/blob/master/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext.
+ * The name of the grammar was adopted to avoid bootstrapping compilation problems 
+ * (same package names would be generated as the original Xtext framework is using).
+ * So, this is not another grammar than the original one and therefore the license remains.  
+ */
+
 grammar de.grammarcraft.xtext.ls.Xtext with org.eclipse.xtext.common.Terminals
 
 import "http://www.eclipse.org/2008/Xtext"
