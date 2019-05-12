@@ -45,9 +45,9 @@ export function activate(context: ExtensionContext) {
         // Register the server for plain text documents
         documentSelector: ['xtext'],
         synchronize: {
-            // Synchronize the setting section 'yangLanguageServer' to the server
+            // Synchronize the setting section 'xtextLanguageServer' to the server
             configurationSection: 'xtextLanguageServer',
-            // Notify the server about file changes to '.yang files contain in the workspace
+            // Notify the server about file changes to '.xtext files contain in the workspace
             fileEvents: workspace.createFileSystemWatcher('**/*.xtext')
         }
     }
