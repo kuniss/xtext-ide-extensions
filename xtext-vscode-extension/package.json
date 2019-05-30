@@ -72,10 +72,10 @@
     },
     "devDependencies": {
         "@types/node": "^8.10.48",
-        "typescript": "^3.4.5"
+        "typescript": "^3.4.5",
+        "vscode": "^1.1.31"
     },
     "dependencies": {
-        "vscode": "^1.1.31",
         "vscode-languageclient": "^3.1.0"
     }
 }
