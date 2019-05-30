@@ -28,15 +28,23 @@ export function activate(context: ExtensionContext) {
     let executable = os.platform() === 'win32' ? 'xtext-language-server.bat' : 'xtext-language-server';
     let serverModule = context.asAbsolutePath(path.join('server', 'bin', executable));
 
+    let env = process.env
+    let isLinkingDiagnosticDisabled = workspace.getConfiguration().get('xtextLanguageServer.crossReferenceErrorsDisabled')
+    if (isLinkingDiagnosticDisabled) {
+        env['XTEXT_LANGUAGE_SERVER_OPTS'] = '-DdisableLinkingDiagnosticMessages=true' 
+    }
+
     // If the extension is launched in debug mode then the debug server options are used
     // Otherwise the run options are used
     let serverOptions: ServerOptions = {
         run: {
-            command: serverModule
+            command: serverModule,
+            options: env
         },
         debug: {
             command: serverModule,
-            args: ['-Xdebug', '-Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n,quiet=y', '-Xmx256m']
+            args: ['-Xdebug', '-Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n,quiet=y', '-Xmx256m'],
+            options: env
         }
     }
 
