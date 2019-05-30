@@ -9,19 +9,21 @@ Currrently the following features are supported:
 * folding
 * auto bracket closing and insertion
 * snippets
-* for file local definitions only:
+* for file-local definitions only:
   * hover information
   * auto completion
-  * jumpt to defintion
-  * error checking
+  * jumpt to definition
 
 ## Known Issues
 
-* resolving definitions from `import` statements and `with` statements (grammar inheritance) are not supported and result in errors 
+* externals definitions from model `import` statements and `with` statements (grammar inheritance) cannot be jumped to
+* undefined file-local definitions are not marked as errors
 
 ## Release Notes
 
-beta; not for production use yet
+* valuable for Xtext grammar navigation and reading
+* slightly valuable for grammar writing
+* no code generation take place at all (use Gradle or Maven for that)
 
 ## Development Hints
 This extension was initially created using [VS Code's Yeoman templates](https://code.visualstudio.com/api/get-started/your-first-extension), running `yo code` and selecting the `New Language` option.
@@ -31,3 +33,5 @@ The Textmate "grammar" was developed using the syntax highlighting grammer edior
 For working on the TextMate "grammar" please consider using the *Iro* specifcaton file ../Xtext.iro.
 
 The language server is created using the Xtext language creation framework itself. The Xtext grammar for that was taken from the [eclipse/xtext-core](https://github.com/eclipse/xtext-core) project. Only the grammar name was adapted to avoid bootstrapping compilation problems.
+
+Anyone to take over pushing this extension forward making it more valuable is wellcome. I'm not planing to invest a lot more time, unfortunately.
