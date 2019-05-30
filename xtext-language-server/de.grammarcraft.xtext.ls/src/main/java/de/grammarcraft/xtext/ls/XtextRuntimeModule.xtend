@@ -3,9 +3,16 @@
  */
 package de.grammarcraft.xtext.ls
 
+import de.grammarcraft.xtext.ls.custom.DeactivatableLinkingDiagnosticMessageProvider
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider
 
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 class XtextRuntimeModule extends AbstractXtextRuntimeModule {
+    
+    def Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
+        DeactivatableLinkingDiagnosticMessageProvider
+    }
+    
 }
